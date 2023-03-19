@@ -55,6 +55,7 @@ void Proc::_bind_methods()
     ClassDB::bind_method(D_METHOD("get_generate_navigation"), &Proc::get_generate_navigation);
     ClassDB::bind_method(D_METHOD("set_noise_texture", "p_noise_texture"), &Proc::set_noise_texture);
     ClassDB::bind_method(D_METHOD("get_noise_texture"), &Proc::get_noise_texture);
+    ClassDB::bind_method(D_METHOD("get_random_point"), &Proc::get_random_point);
     ClassDB::bind_method(D_METHOD("noise_ready"), &Proc::noise_ready);
 
     ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "terrain_material", PROPERTY_HINT_RESOURCE_TYPE, "Material"), "set_terrain_material", "get_terrain_material");
@@ -197,6 +198,10 @@ void Proc::set_noise_texture(Ref<NoiseTexture2D> p_noise_texture) {
 
 Ref<NoiseTexture2D> Proc::get_noise_texture() {
     return noise_texture;
+}
+
+Vector3 Proc::get_random_point() {
+    return mesh_verts[Ref<RandomNumberGenerator>(rand)->randi_range(0, mesh_verts.size() - 1)];
 }
 
 

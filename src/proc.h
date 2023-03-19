@@ -86,6 +86,8 @@ public:
     Ref<NoiseTexture2D> get_noise_texture();
 
     void noise_ready();
+
+    Vector3 get_random_point();
 };
 
 #endif // PROC_CLASS_H
