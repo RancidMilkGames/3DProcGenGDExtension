@@ -1,6 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
 game/bin/proc/*
+# /project/addons/proc/*
 .sconsign*.dblite
 
 # Binaries
@@ -22,5 +23,7 @@ bin
 *.idb
 *.exp
 
+
 # Clion IDE
 .idea/*
+

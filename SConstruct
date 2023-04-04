@@ -17,14 +17,14 @@ sources = Glob("src/*.cpp")
 
 if env["platform"] == "macos":
     library = env.SharedLibrary(
-        "project/bin/proc/libgdproc.{}.{}.framework/libgdproc.{}.{}".format(
+        "project/addons/proc/libgdproc.{}.{}.framework/libgdproc.{}.{}".format(
             env["platform"], env["target"], env["platform"], env["target"]
         ),
         source=sources,
     )
 else:
     library = env.SharedLibrary(
-        "project/bin/proc/libgdproc{}{}".format(env["suffix"], env["SHLIBSUFFIX"]),
+        "project/addons/proc/libgdproc{}{}".format(env["suffix"], env["SHLIBSUFFIX"]),
         source=sources,
     )
 
