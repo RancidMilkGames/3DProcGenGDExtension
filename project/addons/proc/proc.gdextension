@@ -12,3 +12,8 @@ windows.x86_64.debug = "res://addons/proc/libgdproc.windows.template_debug.x86_6
 windows.x86_64.release = "res://addons/proc/libgdproc.windows.template_release.x86_64.dll"
 macos.debug = "res://addons/proc/libgdproc.macos.template_debug.framework"
 macos.release = "res://addons/proc/libgdproc.macos.template_release.framework"
+
+[icons]
+
+Proc = "res://addons/proc/icons/Proc.svg"
+ProcSquare = "res://addons/proc/icons/ProcSquare.svg"

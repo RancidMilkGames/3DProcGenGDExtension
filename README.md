@@ -26,4 +26,7 @@ The extension works by making landscape “chunks”. The main node you'll be wo
 * Terrain material is the material to apply to the landscape
 * Noise Texture allows you to set the noise that will be used for generation
 
+The icons for the nodes only work in 4.x versions of Godot. Currently, 4.0 versions don't support it.
+
 ![landscape6](https://user-images.githubusercontent.com/115530728/226147429-562b472c-f656-4b66-955f-096977f00f98.png)
+
