@@ -13,7 +13,6 @@ Proc::Proc() {
 }
 
 Proc::~Proc() {
-    memfree(rand);
 }
 
 void Proc::_notification(int p_what) {
@@ -201,7 +200,7 @@ Ref<NoiseTexture2D> Proc::get_noise_texture() {
 }
 
 Vector3 Proc::get_random_point() {
-    return mesh_verts[Ref<RandomNumberGenerator>(rand)->randi_range(0, mesh_verts.size() - 1)];
+    return mesh_verts[rand->randi_range(0, mesh_verts.size() - 1)];
 }
 
 

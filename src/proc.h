@@ -39,7 +39,7 @@ public:
     Vector2 square_size;
 
     PackedVector3Array mesh_verts = PackedVector3Array();
-    RandomNumberGenerator *rand = memnew(RandomNumberGenerator);
+    Ref<RandomNumberGenerator> rand = memnew(RandomNumberGenerator);
 
 
 

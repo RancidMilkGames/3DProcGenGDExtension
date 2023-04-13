@@ -1,20 +1,37 @@
 # 3DProcGenGDExtension
 A GDExtension for generating 3D procedural worlds. For more info on GDExtensions, visit https://docs.godotengine.org/en/stable/tutorials/scripting/gdextension/index.html
 
-### To Build
+## To Build
 Use `scons` + `your build options` to build the extension.
 
 *Windows build libraries are included in the repo, so you don't need to build them yourself if you don't plan on making any changes.*
 
-### Example:
+## Example:
 * Run `scons platform=linux` to build the debug extension for linux.
 * Run `scons platform=windows` to build the debug extension for windows.
 * Run `scons target=template_release` to build the release extension for your current platform.
 
-### To Use
+## To Use
 Copy the addons folder to your project folder(after you've run scons)
 
-### Notes
+### Example Code:
+```
+extends Node3D
+
+# You can replace this cam with your player if you want
+@export var cam: Camera3D
+@export var proc: Proc
+
+func _ready():
+    # Generate the landscape
+    proc.generate()
+    # Wait for the landscape to be generated
+    await proc.generated
+    # Set the camera to a random point on the landscape
+    cam.global_position = proc.get_random_point() + Vector3(0, 20, 0)
+```
+
+## Notes
 The extension works by making landscape “chunks”. The main node you'll be working with is named Proc. The options for Proc are:
 
 * The row and column settings allow you to choose how many chunks are made.
