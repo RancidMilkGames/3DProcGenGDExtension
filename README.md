@@ -4,15 +4,13 @@ A GDExtension for generating 3D procedural worlds. For more info on GDExtensions
 ## To Build
 Use `scons` + `your build options` to build the extension.
 
-*Windows build libraries are included in the repo, so you don't need to build them yourself if you don't plan on making any changes.*
-
 ## Example:
 * Run `scons platform=linux` to build the debug extension for linux.
 * Run `scons platform=windows` to build the debug extension for windows.
 * Run `scons target=template_release` to build the release extension for your current platform.
 
 ## To Use
-Copy the addons folder to your project folder(after you've run scons)
+Copy the `project/addons/proc` folder to the `res://addons` folder of any project you want to add it to. Remember to run `scons` for any code changes you made to take effect. You can make a godot project in the "project" folder of this repo for quick testing.
 
 ### Example Code:
 ```
