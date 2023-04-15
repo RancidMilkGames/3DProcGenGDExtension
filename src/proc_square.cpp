@@ -2,19 +2,19 @@
 #include "proc_square.h"
 
 #include <godot_cpp/core/class_db.hpp>
-#include <godot_cpp/classes/navigation_mesh.hpp>
+
 #include <godot_cpp/classes/rendering_server.hpp>
 
 using namespace godot;
 
 ProcSquare::ProcSquare() {
     nav_mesh = Ref<NavigationMesh>(memnew(NavigationMesh));
-    nav_region->set_navigation_mesh((Ref<NavigationMesh> &) nav_mesh);
+    nav_region->set_navigation_mesh(nav_mesh);
 }
 
-ProcSquare::~ProcSquare() {
-    if (((Ref<NavigationMesh> &) nav_mesh).is_valid()) {
-        ((Ref<NavigationMesh> &) nav_mesh)->unreference();
+ProcSquare::~ProcSquare() {/*
+    if (nav_mesh.is_valid()) {
+        nav_mesh->unreference();
     }
     NavigationServer3D::get_singleton()->free_rid(nav_region->get_region_rid());
 
@@ -24,7 +24,7 @@ ProcSquare::~ProcSquare() {
     if (mesh_instance->is_visible_in_tree()) {
         RenderingServer::get_singleton()->free_rid(mesh_instance->get_instance());
         memfree(mesh_instance);
-    }
+    }*/
 }
 
 void ProcSquare::_bind_methods() {
@@ -41,14 +41,14 @@ void ProcSquare::_notification(int p_what) {
             add_child(collision_shape);
             add_child(nav_region);
             if (proc_level->generate_navigation) {
-                Ref<NavigationMesh> n_mesh = (Ref<NavigationMesh> &) nav_mesh;
+                Ref<NavigationMesh> n_mesh = nav_mesh;
                 n_mesh->set_cell_size(2.0f);
                 n_mesh->set_agent_radius(2.0f);
                 n_mesh->set_agent_max_slope(75.0f);
                 n_mesh->set_agent_max_climb(3.0f);
 
             }
-            nav_region->set_navigation_mesh(Ref<NavigationMesh>(nav_mesh));
+            nav_region->set_navigation_mesh(nav_mesh);
             nav_region->add_child(mesh_instance);
 
         } break;

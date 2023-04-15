@@ -93,7 +93,7 @@ void Proc::generate() {
 
     FastNoiseLite *noise_lite = Object::cast_to<FastNoiseLite>(Ref<Noise>(noise).operator->());
     noise_lite->set_seed(Ref<RandomNumberGenerator>(rand)->randi_range(0, 1000000));
-    Callable &callable = Callable(this, "noise_ready");
+    Callable callable = Callable(this, "noise_ready");
     Ref<NoiseTexture2D>(noise_texture)->connect("changed", callable, Object::CONNECT_ONE_SHOT);
 
     RID default_3d_map_rid = get_world_3d()->get_navigation_map();
