@@ -88,6 +88,7 @@ jobs:
 #        working-directory: godot-cpp
 
       - name: CompileExtension
+        id: CompileExtension
         shell: sh
         run: |
           scons target='template_release' platform='${{ matrix.platform }}' arch='${{ matrix.arch }}'
@@ -103,7 +104,8 @@ jobs:
           path: 'project/addons/proc'
 
       - name: ArchiveRelease
-        if: steps.CompileExtension.outcome == 'success'
+        id: ArchiveRelease
+        if: steps.CompileExtension.outcome == 'success' || steps.CompileExtension.conclusion == 'success'
         uses: thedoctor0/zip-release@0.7.1
         with:
           type: 'zip'
@@ -118,4 +120,4 @@ jobs:
           omitNameDuringUpdate: true
           omitBodyDuringUpdate: true
           token: ${{ secrets.GITHUB_TOKEN }}
-        if: steps.ArchiveRelease.outcome == 'success'
+        if: steps.ArchiveRelease.outcome == 'success'  || steps.ArchiveRelease.conclusion == 'success'
