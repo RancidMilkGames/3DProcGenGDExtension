@@ -89,7 +89,7 @@ jobs:
           path: 'project/addons/proc'
 
       - name: ArchiveRelease
-        if: needs.CompileExtension.outcome == 'success'
+        if: steps.CompileExtension.outcome == 'success'
         uses: thedoctor0/zip-release@0.7.1
         with:
           type: 'zip'
@@ -104,4 +104,4 @@ jobs:
           omitNameDuringUpdate: true
           omitBodyDuringUpdate: true
           token: ${{ secrets.GITHUB_TOKEN }}
-        if: needs.ArchiveRelease.outcome == 'success'
+        if: steps.ArchiveRelease.outcome == 'success'
