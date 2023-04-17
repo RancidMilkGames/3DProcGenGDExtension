@@ -20,20 +20,20 @@ jobs:
           - identifier: windows
             os: windows-latest
             name: 🏁 Windows
-            target: template_release
+            target: template
             platform: windows
             arch: x86_64
           - identifier: macos
             os: macos-latest
             name: 🍎 macOS (universal)
-            target: template_release
+            target: template
             platform: macos
             arch: universal
           - identifier: linux
             os: ubuntu-latest
             name: 🐧 Linux
             runner: ubuntu-20.04
-            target: template_release
+            target: template
             platform: linux
             arch: x86_64
 
@@ -89,7 +89,7 @@ jobs:
           path: 'project/addons/proc'
 
       - name: ArchiveRelease
-        if: needs.CompileExtension.result == 'success'
+        if: needs.CompileExtension.outcome == 'success'
         uses: thedoctor0/zip-release@0.7.1
         with:
           type: 'zip'
@@ -104,4 +104,4 @@ jobs:
           omitNameDuringUpdate: true
           omitBodyDuringUpdate: true
           token: ${{ secrets.GITHUB_TOKEN }}
-        if: needs.ArchiveRelease.result == 'success'
+        if: needs.ArchiveRelease.outcome == 'success'
