@@ -81,11 +81,11 @@ jobs:
         if: ${{ matrix.platform == 'windows' }}
         uses: egor-tensin/setup-mingw@v2
 
-#      - name: Compile godot-cpp
-#        shell: sh
-#        run: |
-#          scons
-#        working-directory: godot-cpp
+      - name: Compile godot-cpp
+        shell: sh
+        run: |
+          scons
+        working-directory: godot-cpp
 
       - name: CompileExtension
         id: CompileExtension
@@ -103,20 +103,22 @@ jobs:
           name: ${{ github.event.repository.name }}
           path: 'project/addons/proc'
 
-      - name: ArchiveRelease
-        id: ArchiveRelease
-        if: steps.CompileExtension.outcome == 'success' || steps.CompileExtension.conclusion == 'success'
-        uses: thedoctor0/zip-release@0.7.1
-        with:
-          type: 'zip'
-          filename: '${{ env.LIBNAME }}.${{ matrix.platform }}.${{ matrix.target }}.${{ matrix.arch }}.zip'
-          path: 'project/addons/proc'
+#      - name: ArchiveRelease
+#        id: ArchiveRelease
+#        if: steps.CompileExtension.outcome == 'success' || steps.CompileExtension.conclusion == 'success'
+#        uses: thedoctor0/zip-release@0.7.1
+#        with:
+#          type: 'zip'
+#          filename: '${{ env.LIBNAME }}.${{ matrix.platform }}.${{ matrix.target }}.${{ matrix.arch }}.zip'
+#          path: 'project/addons/proc'
 
       - name: Create and upload asset
         uses: ncipollo/release-action@v1
         with:
+          name: ${{ github.ref_name }}
           allowUpdates: true
-          artifacts: "${{ env.LIBNAME }}.${{ matrix.platform }}.${{ matrix.target }}.${{ matrix.arch }}.zip"
+          # artifacts: "${{ env.LIBNAME }}.${{ matrix.platform }}.${{ matrix.target }}.${{ matrix.arch }}.zip"
+          artifacts: 'project/addons/*'
           omitNameDuringUpdate: true
           omitBodyDuringUpdate: true
           token: ${{ secrets.GITHUB_TOKEN }}
