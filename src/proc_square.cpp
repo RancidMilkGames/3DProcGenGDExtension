@@ -12,7 +12,7 @@ ProcSquare::ProcSquare() {
     nav_region->set_navigation_mesh(nav_mesh);
 }
 
-ProcSquare::~ProcSquare() {/*
+ProcSquare::~ProcSquare() {
     if (nav_mesh.is_valid()) {
         nav_mesh->unreference();
     }
@@ -24,7 +24,7 @@ ProcSquare::~ProcSquare() {/*
     if (mesh_instance->is_visible_in_tree()) {
         RenderingServer::get_singleton()->free_rid(mesh_instance->get_instance());
         memfree(mesh_instance);
-    }*/
+    }
 }
 
 void ProcSquare::_bind_methods() {
