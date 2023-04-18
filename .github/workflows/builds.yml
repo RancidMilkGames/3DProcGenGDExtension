@@ -97,10 +97,11 @@ jobs:
         if: ${{ matrix.platform == 'windows' }}
         run: |
           Remove-Item project/addons/proc/* -Include *.exp,*.lib,*.pdb -Force
-      - name: Upload artifact
+      - name: UploadArtifact
+        id: UploadArtifact
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ github.event.repository.name }}
+          name: ""${{ github.event.repository.name }}-addon"
           path: 'project/addons/proc'
 
 #      - name: ArchiveRelease
@@ -122,4 +123,4 @@ jobs:
           omitNameDuringUpdate: true
           omitBodyDuringUpdate: true
           token: ${{ secrets.GITHUB_TOKEN }}
-        if: steps.ArchiveRelease.outcome == 'success'  || steps.ArchiveRelease.conclusion == 'success'
+        if: steps.UploadArtifact.outcome == 'success'  || steps.UploadArtifact.conclusion == 'success'
