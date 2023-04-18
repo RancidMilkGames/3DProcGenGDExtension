@@ -110,7 +110,7 @@ jobs:
         uses: thedoctor0/zip-release@0.7.1
         with:
           type: 'zip'
-          filename: 'addons.zip'
+          filename: '${{ matrix.platform }}.zip'
           path: 'project/addons/proc'
 
       - name: Create and upload asset
@@ -120,7 +120,7 @@ jobs:
           tag: 'commit-${{ github.sha }}'
           allowUpdates: true
           # artifacts: "${{ env.LIBNAME }}.${{ matrix.platform }}.${{ matrix.target }}.${{ matrix.arch }}.zip"
-          artifacts: 'addons.zip'
+          artifacts: '${{ matrix.platform }}.zip'
           omitNameDuringUpdate: true
           omitBodyDuringUpdate: true
           token: ${{ secrets.GITHUB_TOKEN }}
