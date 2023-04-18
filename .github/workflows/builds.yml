@@ -113,6 +113,12 @@ jobs:
           filename: '${{ matrix.platform }}.zip'
           path: 'project/addons/proc'
 
+      - name: Extract branch name
+        shell: bash
+        run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >>$GITHUB_OUTPUT
+        id: extract_branch
+
+
       - name: Create and upload asset
         uses: ncipollo/release-action@v1
         with:
@@ -124,4 +130,4 @@ jobs:
           omitNameDuringUpdate: true
           omitBodyDuringUpdate: true
           token: ${{ secrets.GITHUB_TOKEN }}
-        if: steps.ArchiveRelease.outcome == 'success'  || steps.ArchiveRelease.conclusion == 'success'
+        if: steps.ArchiveRelease.conclusion == 'success' && ${{ steps.extract_branch.outputs.branch }} == 'master'
