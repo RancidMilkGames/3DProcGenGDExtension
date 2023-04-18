@@ -120,7 +120,7 @@ jobs:
           tag: ${{ github.ref }}
           allowUpdates: true
           # artifacts: "${{ env.LIBNAME }}.${{ matrix.platform }}.${{ matrix.target }}.${{ matrix.arch }}.zip"
-          artifacts: 'project/addons/*'
+          artifacts: 'addons.zip'
           omitNameDuringUpdate: true
           omitBodyDuringUpdate: true
           token: ${{ secrets.GITHUB_TOKEN }}
