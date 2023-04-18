@@ -1,6 +1,14 @@
 name: Builds
 
-on: [push, pull_request]
+on: [push:
+      inputs:
+        tag:
+          description: 'The tag to use for the release.'
+          required: true
+          default: 'Current'
+      ,
+     pull_request
+]
 
 env:
   LIBNAME: libgdproc
