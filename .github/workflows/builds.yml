@@ -117,7 +117,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           # name: ${{ github.ref_name }}
-          tag: ${{ github.ref }}
+          tag: ${{ github.job_workflow_sha }}
           allowUpdates: true
           # artifacts: "${{ env.LIBNAME }}.${{ matrix.platform }}.${{ matrix.target }}.${{ matrix.arch }}.zip"
           artifacts: 'addons.zip'
