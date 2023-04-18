@@ -1,13 +1,6 @@
 name: Builds
 
-on:
-  push:
-    inputs:
-      tag:
-        description: 'The tag to use for the release.'
-        required: true
-        default: 'Current'
-
+on: [push, pull_request]
 
 env:
   LIBNAME: libgdproc
@@ -123,7 +116,8 @@ jobs:
       - name: Create and upload asset
         uses: ncipollo/release-action@v1
         with:
-          name: ${{ github.ref_name }}
+          # name: ${{ github.ref_name }}
+          tag: ${{ github.ref_name }}
           allowUpdates: true
           # artifacts: "${{ env.LIBNAME }}.${{ matrix.platform }}.${{ matrix.target }}.${{ matrix.arch }}.zip"
           artifacts: 'project/addons/*'
