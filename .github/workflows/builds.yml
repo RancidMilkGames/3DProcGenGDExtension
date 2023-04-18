@@ -101,7 +101,7 @@ jobs:
         id: UploadArtifact
         uses: actions/upload-artifact@v3
         with:
-          name: ""${{ github.event.repository.name }}-addon"
+          name: "${{ github.event.repository.name }}-addon"
           path: 'project/addons/proc'
 
 #      - name: ArchiveRelease
