@@ -9,6 +9,9 @@ Use `scons` + `your build options` to build the extension.
 * Run `scons platform=windows` to build the debug extension for windows.
 * Run `scons target=template_release` to build the release extension for your current platform.
 
+## To Edit:
+* For IDE features/suggestions, open the project with the CMakeLists.txt file in the root directory
+
 ## To Use
 Copy the `project/addons/proc` folder to the `res://addons` folder of any project you want to add it to. Remember to run `scons` for any code changes you made to take effect. You can make a godot project in the "project" folder of this repo for quick testing.
 

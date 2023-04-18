@@ -27,3 +27,4 @@ bin
 # Clion IDE
 .idea/*
 
+/cmake-build-debug/
