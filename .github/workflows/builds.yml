@@ -104,14 +104,14 @@ jobs:
           name: "${{ github.event.repository.name }}-addon"
           path: 'project/addons/proc'
 
-#      - name: ArchiveRelease
-#        id: ArchiveRelease
-#        if: steps.CompileExtension.outcome == 'success' || steps.CompileExtension.conclusion == 'success'
-#        uses: thedoctor0/zip-release@0.7.1
-#        with:
-#          type: 'zip'
-#          filename: '${{ env.LIBNAME }}.${{ matrix.platform }}.${{ matrix.target }}.${{ matrix.arch }}.zip'
-#          path: 'project/addons/proc'
+      - name: ArchiveRelease
+        id: ArchiveRelease
+        if: steps.CompileExtension.outcome == 'success' || steps.CompileExtension.conclusion == 'success'
+        uses: thedoctor0/zip-release@0.7.1
+        with:
+          type: 'zip'
+          filename: 'addons.zip'
+          path: 'project/addons/proc'
 
       - name: Create and upload asset
         uses: ncipollo/release-action@v1
@@ -124,4 +124,4 @@ jobs:
           omitNameDuringUpdate: true
           omitBodyDuringUpdate: true
           token: ${{ secrets.GITHUB_TOKEN }}
-        if: steps.UploadArtifact.outcome == 'success'  || steps.UploadArtifact.conclusion == 'success'
+        if: steps.ArchiveRelease.outcome == 'success'  || steps.ArchiveRelease.conclusion == 'success'
