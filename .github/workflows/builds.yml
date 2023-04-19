@@ -105,8 +105,8 @@ jobs:
         id: UploadArtifact
         uses: actions/upload-artifact@v3
         with:
-          name: "proc"
-          path: 'project/addons'
+          name: "addons"
+          path: 'project'
 
   package:
     runs-on: ubuntu-latest
