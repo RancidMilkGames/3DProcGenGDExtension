@@ -122,7 +122,7 @@ jobs:
         uses: thedoctor0/zip-release@0.7.1
         with:
           type: 'zip'
-          filename: '${{ proc }}.zip'
+          filename: 'proc.zip'
           path: 'project/addons/proc'
 
       - name: Extract branch name
@@ -135,7 +135,7 @@ jobs:
         with:
           tag: 'commit-${{ github.sha }}'
           allowUpdates: true
-          artifacts: '${{ proc }}.zip'
+          artifacts: 'proc.zip'
           omitNameDuringUpdate: true
           omitBodyDuringUpdate: true
           token: ${{ secrets.GITHUB_TOKEN }}
