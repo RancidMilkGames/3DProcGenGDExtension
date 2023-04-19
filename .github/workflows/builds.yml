@@ -114,6 +114,7 @@ jobs:
     needs: build
     steps:
       - name: DownloadArtifacts
+        id: DownloadArtifacts
         uses: actions/download-artifact@v3
         with:
           path: 'project/addons'
