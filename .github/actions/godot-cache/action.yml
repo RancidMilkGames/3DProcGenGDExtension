@@ -11,6 +11,7 @@ runs:
   using: "composite"
   steps:
     # Upload cache on completion and check it out now
+
     - name: Load .scons_cache directory
       uses: actions/cache@v3
       with:
@@ -21,3 +22,12 @@ runs:
           ${{inputs.cache-name}}-${{env.GODOT_BASE_BRANCH}}-${{github.ref}}-${{github.sha}}
           ${{inputs.cache-name}}-${{env.GODOT_BASE_BRANCH}}-${{github.ref}}
           ${{inputs.cache-name}}-${{env.GODOT_BASE_BRANCH}}
+
+    - name: Load mingw64 cache
+      if: runner.os == 'Windows'
+      uses: actions/cache@v3
+      with:
+        path: 'C:\ProgramData\chocolatey\lib\mingw\tools\install'
+        key: 'windows-mingw64'
+        restore-keys: |
+          windows-mingw64
