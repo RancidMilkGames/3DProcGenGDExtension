@@ -42,8 +42,8 @@ jobs:
             arch: x86_64
             cache-name: linux-x86_64
 
-    permissions:
-      contents: write
+#    permissions:
+#      contents: write
 
     env:
       SCONS_CACHE: ${{ github.workspace }}/.scons-cache/
@@ -112,6 +112,10 @@ jobs:
     runs-on: ubuntu-latest
     name: 📦 Package
     needs: build
+
+    permissions:
+      contents: write
+
     steps:
       - name: DownloadArtifacts
         id: DownloadArtifacts
