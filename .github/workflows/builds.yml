@@ -93,10 +93,12 @@ jobs:
         run: |
           scons target='template_release' platform='${{ matrix.platform }}' arch='${{ matrix.arch }}'
           scons target='template_debug' platform='${{ matrix.platform }}' arch='${{ matrix.arch }}'
+
       - name: Delete compilation files
         if: ${{ matrix.platform == 'windows' }}
         run: |
           Remove-Item project/addons/proc/* -Include *.exp,*.lib,*.pdb -Force
+
       - name: UploadArtifact
         id: UploadArtifact
         uses: actions/upload-artifact@v3
@@ -104,13 +106,23 @@ jobs:
           name: "${{ github.event.repository.name }}-addon"
           path: 'project/addons/proc'
 
+  package:
+    runs-on: ubuntu-latest
+    name: 📦 Package
+    needs: build
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: 'project/addons'
+
       - name: ArchiveRelease
         id: ArchiveRelease
         if: steps.CompileExtension.outcome == 'success' || steps.CompileExtension.conclusion == 'success'
         uses: thedoctor0/zip-release@0.7.1
         with:
           type: 'zip'
-          filename: '${{ matrix.platform }}.zip'
+          filename: '${{ proc }}.zip'
           path: 'project/addons/proc'
 
       - name: Extract branch name
@@ -118,16 +130,14 @@ jobs:
         run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >>$GITHUB_OUTPUT
         id: extract_branch
 
-
       - name: Create and upload asset
         uses: ncipollo/release-action@v1
         with:
-          # name: ${{ github.ref_name }}
           tag: 'commit-${{ github.sha }}'
           allowUpdates: true
-          # artifacts: "${{ env.LIBNAME }}.${{ matrix.platform }}.${{ matrix.target }}.${{ matrix.arch }}.zip"
-          artifacts: '${{ matrix.platform }}.zip'
+          artifacts: '${{ proc }}.zip'
           omitNameDuringUpdate: true
           omitBodyDuringUpdate: true
           token: ${{ secrets.GITHUB_TOKEN }}
-        if: steps.ArchiveRelease.conclusion == 'success' && ${{ steps.extract_branch.outputs.branch }} == 'master'
+        #  && ${{ steps.extract_branch.outputs.branch }} == 'master'
+        if: steps.ArchiveRelease.conclusion == 'success'

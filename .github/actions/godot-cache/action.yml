@@ -15,8 +15,9 @@ runs:
       uses: actions/cache@v3
       with:
         path: ${{inputs.scons-cache}}
-        key: ${{inputs.cache-name}}-${{env.GODOT_BASE_BRANCH}}-${{github.ref}}-${{github.sha}}
+        key: ${{inputs.cache-name}}
         restore-keys: |
+          ${{inputs.cache-name}}
           ${{inputs.cache-name}}-${{env.GODOT_BASE_BRANCH}}-${{github.ref}}-${{github.sha}}
           ${{inputs.cache-name}}-${{env.GODOT_BASE_BRANCH}}-${{github.ref}}
           ${{inputs.cache-name}}-${{env.GODOT_BASE_BRANCH}}
