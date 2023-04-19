@@ -117,7 +117,7 @@ jobs:
         id: DownloadArtifacts
         uses: actions/download-artifact@v3
         with:
-          path: 'project/addons'
+          path: 'project/addons/proc'
 
       - name: ArchiveRelease
         id: ArchiveRelease
