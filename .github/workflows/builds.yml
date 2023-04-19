@@ -105,8 +105,8 @@ jobs:
         id: UploadArtifact
         uses: actions/upload-artifact@v3
         with:
-          name: "${{ github.event.repository.name }}-addon"
-          path: 'project/addons/proc'
+          name: "proc"
+          path: 'project/addons'
 
   package:
     runs-on: ubuntu-latest
@@ -121,7 +121,7 @@ jobs:
         id: DownloadArtifacts
         uses: actions/download-artifact@v3
         with:
-          path: 'project/addons/proc'
+          path: 'project/addons'
 
       - name: ArchiveRelease
         id: ArchiveRelease
@@ -130,7 +130,7 @@ jobs:
         with:
           type: 'zip'
           filename: 'proc.zip'
-          path: 'project/addons/proc'
+          path: 'project/addons'
 
       - name: Extract branch name
         shell: bash
